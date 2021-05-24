@@ -53,8 +53,8 @@ class ReportForm(FlaskForm):
 
 
 # Configure Database
-app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DB_URI')
-# app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root@localhost/inventory"
+# app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DB_URI')
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root@localhost/inventory"
 # Initialize DB
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)

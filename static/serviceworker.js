@@ -1,6 +1,6 @@
-const staticCacheName = "site-static-v6";
-const dynamicCacheName = "site-dynamic-v9";
-const assets = ["/static"];
+const staticCacheName = "site-static-v4";
+const dynamicCacheName = "site-dynamic-v4";
+const assets = ["/static/images"];
 
 // cache size limit function
 const limitCacheSize = (name, size) => {
