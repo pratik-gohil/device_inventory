@@ -25,7 +25,7 @@
 
 @media only screen and (max-width: 600px) {
   .device-card {
-    margin: 2rem;
+    margin: 1rem;
     padding: 1rem;
   }
 }
