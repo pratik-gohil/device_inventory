@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block content %} {% for message in
+get_flashed_messages() %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{message}}
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+{% endfor %}
+<div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
+  {% for device, location in query %}
+  <div class="col">
+    <div class="device-card card position-relative">
+      <img
+        class="img-fluid"
+        src="/static/images/{{device.type}}.svg"
+        class="card-img-top"
+        alt="{{device.type}}"
+      />
+      <div class="card-body">
+        <a
+          style="text-decoration: none"
+          href="{{url_for('info', id=device.id)}}"
+          class="card-title h5 stretched-link text-dark"
+          >{{device.name|upper}}</a
+        >
+        <p class="card-text h5">{{location.description}}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}

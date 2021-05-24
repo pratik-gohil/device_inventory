@@ -1,0 +1,157 @@
+{% extends 'base.html' %} {% block content %} {% for message in
+get_flashed_messages() %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{message}}
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+{% endfor %} {% for device, location, admin in query %}
+<div class="container p-3">
+  <div style="max-width: fit-content" class="card p-3">
+    <div class="container-fluid">
+      <div class="wrapper row">
+        <div class="details col-md-6 m-2">
+          <h1>{{device.name}}</h1>
+          <p>{{location.description}}</p>
+        </div>
+        {% if device.configuration %}
+        <div class="details col-md-6 m-2">
+          <h5>Configuration :</h5>
+          <p>{{device.configuration}}</p>
+        </div>
+        {% endif %} {% if device.os_installed %}
+        <div class="details col-md-6 m-2">
+          <h5>Operating System :</h5>
+          <p>{{device.os_installed}}</p>
+        </div>
+        {% endif %} {% if exp_message %}
+        <div class="details col-md-6 m-2">
+          <h5>Anti Virus Expiry Date :</h5>
+          <p>{{exp_message}}</p>
+        </div>
+        {% endif %}
+        <div class="details col-md-6 m-2">
+          <h5>Admin :</h5>
+          <div class="m-2">
+            <p>name: {{admin.name}}</p>
+            <p>
+              contact:
+              <span>
+                <ul>
+                  <li>
+                    Office - {{admin.office_contact}} {% if
+                    admin.office_contact_secondary %}
+                    {{admin.office_contact_secondary}} {% endif %}
+                  </li>
+                  <li>
+                    Personal - {{admin.personal_contact}} {% if
+                    admin.personal_contact_secondary %}
+                    {{admin.personal_contact_secondary}} {% endif %}
+                  </li>
+                  <li>Email - {{admin.email}}</li>
+                </ul>
+              </span>
+            </p>
+          </div>
+        </div>
+        <div class="details col-md-6 m-2">
+          <button
+            class="btn btn-warning"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#removeModal"
+          >
+            REMOVE DEVICE
+          </button>
+          <button
+            class="btn btn-danger"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#reportModal"
+          >
+            REPORT ISSUE
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="removeModal"
+  tabindex="-1"
+  aria-labelledby="removeModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="removeModalLabel">Are You Sure?</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">Click remove to remove device</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancel
+        </button>
+        <a href="{{url_for('remove', id=device.id)}}" class="btn btn-danger"
+          >REMOVE</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="reportModal"
+  tabindex="-1"
+  aria-labelledby="reportModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="reportModalLabel">Report Issue</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <form action="{{url_for('info', id=device.id)}}" method="POST">
+        <div class="modal-body">
+          <div class="mb-2">
+            {{form.issue.label(class="form-label")}}
+            {{form.issue(class="form-control")}}
+          </div>
+          <div class="mb2">
+            {{form.message.label(class="form-label")}}
+            {{form.message(class="form-control")}}
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancel
+          </button>
+
+          <input type="submit" value="REPORT" class="btn btn-danger" />
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endfor %} {% endblock content %}

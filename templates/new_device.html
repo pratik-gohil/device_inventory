@@ -1,0 +1,60 @@
+{% extends 'base.html' %} {% block content %} {% for message in
+get_flashed_messages() %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  {{message}} <a class="alert-link" href="/">Go Back</a>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+{% endfor %}
+<h3>Add New Device</h3>
+
+<form style="padding: 20px" method="POST">
+  {% for el in form %} {% for error in el.errors %}
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{error}}
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="alert"
+      aria-label="Close"
+    ></button>
+  </div>
+
+  {% endfor %} {% endfor %} {{form.hidden_tag()}}
+  <div class="mb-2">
+    {{form.name.label(class="form-label")}} {{form.name(class="form-control")}}
+  </div>
+  <div class="mb-2">
+    {{form.type.label(class="form-label")}} {{form.type(class="form-control")}}
+  </div>
+  <div class="mb-2">
+    {{form.company.label(class="form-label")}}
+    {{form.company(class="form-control")}}
+  </div>
+  <div class="mb-2">
+    {{form.configuration.label(class="form-label")}}
+    {{form.configuration(class="form-control")}}
+  </div>
+  <div class="mb-2">
+    {{form.os.label(class="form-label")}} {{form.os(class="form-control")}}
+  </div>
+  <div class="mb-2">
+    {{form.anti_virus_exp.label(class="form-label")}}
+    {{form.anti_virus_exp(class="form-control")}}
+  </div>
+  <div class="mb-2">
+    {{form.location.label(class="form-label")}}
+    {{form.location(class="form-control")}}
+  </div>
+  <div class="mb-2">
+    {{form.admin.label(class="form-label")}}
+    {{form.admin(class="form-control")}}
+  </div>
+
+  {{form.submit(class="btn btn-success")}}
+</form>
+{% endblock content %}
