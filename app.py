@@ -20,14 +20,14 @@ app = Flask(__name__, static_url_path='/static')
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 465
 app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = 'email'
-app.config['MAIL_PASSWORD'] = 'password'
-app.config['MAIL_DEFAULT_SENDER'] = 'email'
+app.config['MAIL_USERNAME'] = environ.get('email')
+app.config['MAIL_PASSWORD'] = environ.get('mail_pass')
+app.config['MAIL_DEFAULT_SENDER'] = environ.get('email')
 
 mail = Mail(app)
 
 # Secret Key
-app.config['SECRET_KEY'] = "secret"
+app.config['SECRET_KEY'] = "secretknekvjnrkvjerkjn"
 
 # Form
 # Add Device Form
@@ -37,7 +37,7 @@ class DeviceForm(FlaskForm):
   company = StringField("Company :", validators=[DataRequired()])
   configuration = StringField("Configuration : (OPTIONAL)")
   os = StringField("Operating System : (OPTIONAL)")
-  anti_virus_exp = DateField("Anti Virus Expiry Date : (OPTIONAL)", format="%Y/%m/%d", validators=[Optional()])
+  anti_virus_exp = DateField("Anti Virus Expiry Date : (OPTIONAL)", format="%m/%d/%Y", validators=[Optional()])
   submit = SubmitField("Submit")
   location = SelectField("Location :", choices=['Ground Floor Admin Table 1', 'Ground Floor Admin Table 2', "Ground Floor Principal Table 1","Ground Floor Account Table 1", "Ground Floor Account Table 2"])
   admin = SelectField("Admin :", choices=['Monika', 'Shweta'])
@@ -139,7 +139,7 @@ def info(id):
     try:
       print(form.issue.data, form.message.data)
       print(id)
-      msg = Message(form.issue.data, recipients=['sosav41477@geekale.com'])
+      msg = Message(form.issue.data, recipients=['didewe9682@geekale.com'])
       msg.html = """
       <div>
         <h1>{}</h1>
