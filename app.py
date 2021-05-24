@@ -37,7 +37,7 @@ class DeviceForm(FlaskForm):
   company = StringField("Company :", validators=[DataRequired()])
   configuration = StringField("Configuration : (OPTIONAL)")
   os = StringField("Operating System : (OPTIONAL)")
-  anti_virus_exp = DateField("Anti Virus Expiry Date : (OPTIONAL)", format="%m/%d/%Y", validators=[Optional()])
+  anti_virus_exp = DateField("Anti Virus Expiry Date : (OPTIONAL)", format="%Y-%m-%d", validators=[Optional()])
   submit = SubmitField("Submit")
   location = SelectField("Location :", choices=['Ground Floor Admin Table 1', 'Ground Floor Admin Table 2', "Ground Floor Principal Table 1","Ground Floor Account Table 1", "Ground Floor Account Table 2"])
   admin = SelectField("Admin :", choices=['Monika', 'Shweta'])
@@ -53,7 +53,8 @@ class ReportForm(FlaskForm):
 
 
 # Configure Database
-app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DB_URI')
+# app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DB_URI')
+app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root@localhost/inventory"
 # Initialize DB
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
