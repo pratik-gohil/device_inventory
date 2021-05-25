@@ -137,7 +137,8 @@ def info(id):
 
   if request.method == 'POST':
     try:
-      msg = Message(form.issue.data, recipients=json.loads(environ.get('recipients')))
+      # json.loads(environ.get('recipients'))
+      msg = Message(form.issue.data, recipients=["didewe9682@geekale.com"])
       msg.html = """
       <div>
         <h1>{}</h1>
