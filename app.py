@@ -154,11 +154,6 @@ def info(id):
       flash("There was a problem")
   return render_template("device.html", id=id, query=query, form=form, exp_message=exp_message)
 
-# serviceworker
-@app.route('/serviceworker.js')
-def sw():
-  return app.send_static_file('serviceworker.js'), 200, {'Content-Type': 'text/javascript'}
-
 # Invalid URL
 @app.errorhandler(404)
 def page_not_found(e):

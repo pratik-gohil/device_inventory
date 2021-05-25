@@ -22,17 +22,8 @@
       href="{{ url_for('static', filename='css/styles.css') }}"
     />
     <link
-      rel="manifest"
-      href="{{ url_for('static', filename='manifest.json') }}"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="{{url_for('static', filename='images/apple_icon.png')}}"
-    />
-    <link
       rel="shortcut icon"
-      href="{{url_for('static', filename='images/favicon.ico')}}"
+      href="{{url_for('static', filename='favicon.ico')}}"
     />
   </head>
   <body>
@@ -50,7 +41,5 @@
       integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT"
       crossorigin="anonymous"
     ></script>
-
-    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
   </body>
 </html>
