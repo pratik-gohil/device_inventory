@@ -55,7 +55,6 @@ class ReportForm(FlaskForm):
 
 # Configure Database
 app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DB_URI')
-# app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://root@localhost/inventory"
 # Initialize DB
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -137,10 +136,6 @@ def info(id):
       exp_message = ""
     break
 
-  reci = '["test@test"]'
-
-  print(type(reci))
-
   if request.method == 'POST':
     try:
       recipients = json.loads(environ.get('recipients'))
@@ -156,7 +151,8 @@ def info(id):
       """.format(form.message.data, location.description)
       mail.send(msg)
       flash("Your issue has been reported")
-    except:
+    except Exception as e:
+      print(e)
       flash("There was a problem")
   return render_template("device.html", id=id, query=query, form=form, exp_message=exp_message)
 
