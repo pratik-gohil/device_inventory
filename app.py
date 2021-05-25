@@ -1,4 +1,3 @@
-from typing import Optional
 from flask import Flask, render_template, flash, request, redirect
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField, TextAreaField, DateField
@@ -138,8 +137,7 @@ def info(id):
 
   if request.method == 'POST':
     try:
-      recipients = json.loads(environ.get('recipients'))
-      msg = Message(form.issue.data, recipients=recipients)
+      msg = Message(form.issue.data, recipients=json.loads(environ.get('recipients')))
       msg.html = """
       <div>
         <h1>{}</h1>
