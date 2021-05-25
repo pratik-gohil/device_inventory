@@ -10,6 +10,7 @@ from flask_migrate import Migrate
 import datetime
 
 from os import environ
+import json
 
 
 from flask_mail import Mail, Message
@@ -136,9 +137,14 @@ def info(id):
       exp_message = ""
     break
 
+  reci = '["test@test"]'
+
+  print(type(reci))
+
   if request.method == 'POST':
     try:
-      msg = Message(form.issue.data, recipients=environ.get('recipients'))
+      recipients = json.loads(environ.get('recipients'))
+      msg = Message(form.issue.data, recipients=recipients)
       msg.html = """
       <div>
         <h1>{}</h1>
